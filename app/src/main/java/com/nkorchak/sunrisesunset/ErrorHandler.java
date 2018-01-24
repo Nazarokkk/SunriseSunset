@@ -1,14 +1,7 @@
 package com.nkorchak.sunrisesunset;
 
 /**
- * Copyright (c) 2004-2017, SpamDrain AB. All Rights Reserved.
- * <p>
- * Redistribution and use in source and binary forms, with or
- * without modification, are prohibited without specific prior
- * written permission from SpamDrain AB.
- * <p>
- * This notice and attribution to SpamDrain AB may not be removed.
- * Created by nkorchak on 24.01.18.
+ * Created by nazarkorchak on 24.01.18.
  */
 
 public class ErrorHandler {

@@ -8,15 +8,9 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/main_content_full_screen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <FrameLayout
         android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_height="match_parent" />
 
     <RelativeLayout
         android:id="@+id/progress_container"

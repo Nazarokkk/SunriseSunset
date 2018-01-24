@@ -3,4 +3,5 @@
     <string name="google_maps_api_key">AIzaSyBuhMfNmBg3R3VJhBE8x30mkzdVLp8954g</string>
 
     <string name="check_network_connection">Check network connection</string>
+    <string name="enter_city">Please enter your city</string>
 </resources>

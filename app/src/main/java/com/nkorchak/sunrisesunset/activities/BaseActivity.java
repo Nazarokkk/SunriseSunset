@@ -40,10 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             Drawable wrapDrawable = DrawableCompat.wrap(progressBar.getIndeterminateDrawable());
-            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this, R.color.green));
+            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this, R.color.colorPrimary));
             progressBar.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
         } else {
-            progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.green), PorterDuff.Mode.SRC_IN);
+            progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         }
 
 //        setSupportActionBar(toolbar);
@@ -70,8 +70,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     }
 
     protected void createSnackBar(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.main_content_full_screen), message, Snackbar.LENGTH_LONG);
-        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.green));
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.main_content), message, Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         TextView textView = snackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();

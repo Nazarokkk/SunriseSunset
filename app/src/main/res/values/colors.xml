@@ -2,11 +2,12 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3F51B5</color>
 
     <color name="white">#FFF</color>
     <color name="transparent">#00ffffff</color>
-    <color name="green">#3bc978</color>
+    <color name="text_color">#1a1a1a</color>
+    <color name="text_hint_color">#ef646464</color>
     <color name="rise_color">#E0CD9A</color>
     <color name="set_color">#F1A8A4</color>
 </resources>

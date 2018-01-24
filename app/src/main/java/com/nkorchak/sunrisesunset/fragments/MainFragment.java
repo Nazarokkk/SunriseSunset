@@ -50,9 +50,10 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     private GoogleApiClient mGoogleApiClient;
 
     private TextView cityNameTextView;
-    private TextView daylengthTextView;
+    private TextView dayLengthTextView;
     private TextView sunRiseTextView;
     private TextView sunSetTextView;
+    private AutoCompleteTextView cityAutoCompView;
 
     private LocationManager locationManager;
     private String provider;
@@ -170,7 +171,7 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     }
 
     private void initUI(View view) {
-        AutoCompleteTextView cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
+        cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
 
         placesAdapter = new PlacesAutoCompleteAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 mGoogleApiClient, null, null);
@@ -178,7 +179,7 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
         cityAutoCompView.setAdapter(placesAdapter);
 
         cityNameTextView = view.findViewById(R.id.tv_city_name);
-        daylengthTextView = view.findViewById(R.id.tv_day_length);
+        dayLengthTextView = view.findViewById(R.id.tv_day_length);
         sunRiseTextView = view.findViewById(R.id.tv_sunrise);
         sunSetTextView = view.findViewById(R.id.tv_sunset);
     }
@@ -240,7 +241,7 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     public void updateUi(SunRiseSunSetResponse sunRiseSunSetResponse) {
         sunRiseTextView.setText(sunRiseSunSetResponse.getResults().getSunrise());
         sunSetTextView.setText(sunRiseSunSetResponse.getResults().getSunset());
-        daylengthTextView.setText(String.format("Day length: %s", sunRiseSunSetResponse.getResults().getDayLength()));
+        dayLengthTextView.setText(String.format("Day length: %s", sunRiseSunSetResponse.getResults().getDayLength()));
         cityNameTextView.setText(address);
     }
 }

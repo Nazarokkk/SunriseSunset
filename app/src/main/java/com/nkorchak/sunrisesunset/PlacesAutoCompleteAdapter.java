@@ -29,7 +29,6 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<PlacesAutoCompleteAd
     private static final String TAG = "PlaceAutocomplete";
     private ArrayList<PlaceAutocomplete> resultList;
     private GoogleApiClient googleApiClient;
-    private LatLngBounds bounds;
     private AutocompleteFilter placeFilter;
     private Context context;
 
@@ -42,13 +41,8 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<PlacesAutoCompleteAd
                                      LatLngBounds bounds, AutocompleteFilter filter) {
         super(context, resource);
         this.googleApiClient = googleApiClient;
-        this.bounds = bounds;
         this.context = context;
         placeFilter = filter;
-    }
-
-    public void setBounds(LatLngBounds bounds) {
-        this.bounds = bounds;
     }
 
     @Override

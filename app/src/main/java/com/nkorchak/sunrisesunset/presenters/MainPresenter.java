@@ -40,8 +40,7 @@ public class MainPresenter extends BasePresenter<MainView> implements IMainPrese
                 if (sunRiseSunSetResponse.getStatus().equals("OK")) {
                     view.updateUi(sunRiseSunSetResponse);
                 } else {
-                    ErrorHandler errorHandler = new ErrorHandler();
-                    view.showSnackBar(errorHandler.handleError(sunRiseSunSetResponse.getStatus()));
+                    view.showSnackBar(new ErrorHandler().handleError(sunRiseSunSetResponse.getStatus()));
                 }
 
                 view.hideLoading();

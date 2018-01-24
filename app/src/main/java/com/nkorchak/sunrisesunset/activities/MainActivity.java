@@ -16,6 +16,8 @@ public class MainActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_content, MainFragment.newInstance(), "MainFragment")
                     .commit();
+        } else {
+            showSnackBar(getString(R.string.check_network_connection));
         }
     }
 }
