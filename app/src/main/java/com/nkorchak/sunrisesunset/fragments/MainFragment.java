@@ -49,7 +49,8 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     private PlacesAutoCompleteAdapter placesAdapter;
     private GoogleApiClient mGoogleApiClient;
 
-    private AutoCompleteTextView autoCompView;
+    private TextView cityNameTextView;
+    private TextView daylengthTextView;
     private TextView sunRiseTextView;
     private TextView sunSetTextView;
 
@@ -169,13 +170,15 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     }
 
     private void initUI(View view) {
-        AutoCompleteTextView autoCompView = view.findViewById(R.id.autoCompleteTextView);
+        AutoCompleteTextView cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
 
         placesAdapter = new PlacesAutoCompleteAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 mGoogleApiClient, null, null);
-        autoCompView.setOnItemClickListener(mAutocompleteClickListener);
-        autoCompView.setAdapter(placesAdapter);
+        cityAutoCompView.setOnItemClickListener(mAutocompleteClickListener);
+        cityAutoCompView.setAdapter(placesAdapter);
 
+        cityNameTextView = view.findViewById(R.id.tv_city_name);
+        daylengthTextView = view.findViewById(R.id.tv_day_length);
         sunRiseTextView = view.findViewById(R.id.tv_sunrise);
         sunSetTextView = view.findViewById(R.id.tv_sunset);
     }
@@ -237,5 +240,7 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     public void updateUi(SunRiseSunSetResponse sunRiseSunSetResponse) {
         sunRiseTextView.setText(sunRiseSunSetResponse.getResults().getSunrise());
         sunSetTextView.setText(sunRiseSunSetResponse.getResults().getSunset());
+        daylengthTextView.setText(String.format("Day length: %s", sunRiseSunSetResponse.getResults().getDayLength()));
+        cityNameTextView.setText(address);
     }
 }

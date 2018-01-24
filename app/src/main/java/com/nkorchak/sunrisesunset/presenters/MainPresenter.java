@@ -1,5 +1,6 @@
 package com.nkorchak.sunrisesunset.presenters;
 
+import com.nkorchak.sunrisesunset.ErrorHandler;
 import com.nkorchak.sunrisesunset.interfaces.IMainPresenter;
 import com.nkorchak.sunrisesunset.models.SunRiseSunSetResponse;
 import com.nkorchak.sunrisesunset.useCases.GetSunRiseSunSetUseCase;
@@ -21,6 +22,7 @@ public class MainPresenter extends BasePresenter<MainView> implements IMainPrese
 
     @Override
     public void getSunRiseSunSet(double lat, double lon) {
+        view.showLoading();
         getSunRiseSunSetUseCase.setData(lat, lon);
         getSunRiseSunSetUseCase.execute(new Subscriber<SunRiseSunSetResponse>() {
             @Override
@@ -30,14 +32,19 @@ public class MainPresenter extends BasePresenter<MainView> implements IMainPrese
 
             @Override
             public void onError(Throwable e) {
-
+                view.hideLoading();
             }
 
             @Override
             public void onNext(SunRiseSunSetResponse sunRiseSunSetResponse) {
                 if (sunRiseSunSetResponse.getStatus().equals("OK")) {
                     view.updateUi(sunRiseSunSetResponse);
+                } else {
+                    ErrorHandler errorHandler = new ErrorHandler();
+                    view.showSnackBar(errorHandler.handleError(sunRiseSunSetResponse.getStatus()));
                 }
+
+                view.hideLoading();
             }
         });
     }

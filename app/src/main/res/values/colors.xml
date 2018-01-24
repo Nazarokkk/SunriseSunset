@@ -7,4 +7,6 @@
     <color name="white">#FFF</color>
     <color name="transparent">#00ffffff</color>
     <color name="green">#3bc978</color>
+    <color name="rise_color">#E0CD9A</color>
+    <color name="set_color">#F1A8A4</color>
 </resources>
