@@ -4,4 +4,5 @@
 
     <string name="check_network_connection">Check network connection</string>
     <string name="enter_city">Please enter your city</string>
+    <string name="current_location_text">Sunrise and sunset in current location</string>
 </resources>

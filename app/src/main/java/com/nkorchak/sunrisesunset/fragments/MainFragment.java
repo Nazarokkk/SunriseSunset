@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -49,11 +50,11 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     private PlacesAutoCompleteAdapter placesAdapter;
     private GoogleApiClient mGoogleApiClient;
 
+    private Button currentLocationButton;
     private TextView cityNameTextView;
     private TextView dayLengthTextView;
     private TextView sunRiseTextView;
     private TextView sunSetTextView;
-    private AutoCompleteTextView cityAutoCompView;
 
     private LocationManager locationManager;
     private String provider;
@@ -75,8 +76,6 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         presenter = new MainPresenter(this);
-
-        getCurrentLocation();
 
         connectToGoogleAPI();
         initUI(view);
@@ -144,6 +143,12 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        currentLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCurrentLocation();
+            }
+        });
     }
 
     @Override
@@ -171,13 +176,14 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     }
 
     private void initUI(View view) {
-        cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
+        AutoCompleteTextView cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
 
         placesAdapter = new PlacesAutoCompleteAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 mGoogleApiClient, null, null);
         cityAutoCompView.setOnItemClickListener(mAutocompleteClickListener);
         cityAutoCompView.setAdapter(placesAdapter);
 
+        currentLocationButton = view.findViewById(R.id.btn_check_current_location);
         cityNameTextView = view.findViewById(R.id.tv_city_name);
         dayLengthTextView = view.findViewById(R.id.tv_day_length);
         sunRiseTextView = view.findViewById(R.id.tv_sunrise);
