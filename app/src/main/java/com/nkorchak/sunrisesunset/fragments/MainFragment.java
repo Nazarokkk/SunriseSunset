@@ -3,9 +3,7 @@ package com.nkorchak.sunrisesunset.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -38,8 +36,6 @@ import com.nkorchak.sunrisesunset.presenters.MainPresenter;
 import com.nkorchak.sunrisesunset.views.MainView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by nazarkorchak on 23.01.18.
@@ -51,16 +47,15 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     private GoogleApiClient mGoogleApiClient;
 
     private Button currentLocationButton;
-    private TextView cityNameTextView;
     private TextView dayLengthTextView;
     private TextView sunRiseTextView;
     private TextView sunSetTextView;
+    private AutoCompleteTextView cityAutoCompView;
 
     private LocationManager locationManager;
     private String provider;
     private double lat;
     private double lon;
-    private String address;
 
     private static final String[] LOCATION_PERMISSIONS = {
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -84,6 +79,9 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     }
 
     private void getCurrentLocation() {
+
+        cityAutoCompView.getText().clear();
+
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -119,21 +117,9 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     @Override
     public void onLocationChanged(Location location) {
         if (location != null) {
-
             lat = location.getLatitude();
             lon = location.getLongitude();
             presenter.getSunRiseSunSet(lat, lon);
-
-            List<Address> addresses;
-            Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
-
-            try {
-                addresses = geocoder.getFromLocation(lat, lon, 1);
-                address = addresses.get(0).getLocality();
-
-            } catch (Exception e) {
-                showSnackBar("Location not available");
-            }
         } else {
             showSnackBar("Location not available");
         }
@@ -176,7 +162,7 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
     }
 
     private void initUI(View view) {
-        AutoCompleteTextView cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
+        cityAutoCompView = view.findViewById(R.id.autoCompleteTextView);
 
         placesAdapter = new PlacesAutoCompleteAdapter(getActivity(), android.R.layout.simple_list_item_1,
                 mGoogleApiClient, null, null);
@@ -184,7 +170,6 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
         cityAutoCompView.setAdapter(placesAdapter);
 
         currentLocationButton = view.findViewById(R.id.btn_check_current_location);
-        cityNameTextView = view.findViewById(R.id.tv_city_name);
         dayLengthTextView = view.findViewById(R.id.tv_day_length);
         sunRiseTextView = view.findViewById(R.id.tv_sunrise);
         sunSetTextView = view.findViewById(R.id.tv_sunset);
@@ -208,7 +193,6 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
                 return;
             }
 
-            address = places.get(0).getAddress().toString();
             lat = places.get(0).getLatLng().latitude;
             lon = places.get(0).getLatLng().longitude;
 
@@ -248,6 +232,5 @@ public class MainFragment extends BaseFragment<IMainPresenter> implements MainVi
         sunRiseTextView.setText(sunRiseSunSetResponse.getResults().getSunrise());
         sunSetTextView.setText(sunRiseSunSetResponse.getResults().getSunset());
         dayLengthTextView.setText(String.format("Day length: %s", sunRiseSunSetResponse.getResults().getDayLength()));
-        cityNameTextView.setText(address);
     }
 }

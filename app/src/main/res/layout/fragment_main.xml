@@ -9,28 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:hint="@string/enter_city"
         android:lines="1"
         android:textColor="@color/text_color"
         android:textColorHint="@color/text_hint_color" />
 
-    <TextView
-        android:id="@+id/tv_city_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/autoCompleteTextView"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/text_color"
-        android:textSize="18sp" />
-
     <LinearLayout
         android:id="@+id/sun_rise_sun_set_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_city_name"
+        android:layout_below="@+id/autoCompleteTextView"
         android:layout_centerHorizontal="true">
 
         <RelativeLayout
